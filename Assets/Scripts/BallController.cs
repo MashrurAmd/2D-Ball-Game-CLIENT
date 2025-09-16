@@ -21,7 +21,7 @@ public class BallController : MonoBehaviour
 
     public void InitRandom()
     {
-        int r = Random.Range(0, 4);
+        int r = Random.Range(0, 6); // now 6 colors
         ballColor = (BallColor)r;
         sr.color = GameManager.Instance.GetColor(ballColor);
 
@@ -38,7 +38,6 @@ public class BallController : MonoBehaviour
 
     private void UpdateSpeed()
     {
-        // Increase speed based on score (e.g., every point adds 0.2f)
         fallSpeed = baseFallSpeed + GameManager.Instance.score * 0.2f;
     }
 

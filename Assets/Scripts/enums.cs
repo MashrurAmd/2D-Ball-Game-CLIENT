@@ -4,9 +4,16 @@ public enum BallColor
     Blue,
     Green,
     Yellow,
-    Orange, // initially disabled
-    Cyan    // initially disabled
+    Orange,
+    Cyan
 }
-public enum Corner { TopRight, TopLeft, BottomLeft, BottomRight }
 
-
+public enum Corner
+{
+    TopRight,
+    TopLeft,
+    BottomLeft,
+    BottomRight,
+    MiddleRight,
+    MiddleLeft
+}

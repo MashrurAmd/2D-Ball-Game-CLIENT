@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.SceneManagement; // for restarting the scene
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -9,6 +9,7 @@ public class GameManager : MonoBehaviour
     [Header("References")]
     public BallSpawner spawner;
     public Transform topRight, topLeft, bottomLeft, bottomRight;
+    public Transform middleRight, middleLeft;
     public Transform centerPoint;
 
     [Header("Gameplay Settings")]
@@ -21,13 +22,15 @@ public class GameManager : MonoBehaviour
     public Color greenColor = Color.green;
     public Color blueColor = Color.blue;
     public Color yellowColor = Color.yellow;
+    public Color orangeColor = new Color(1f, 0.5f, 0f);
+    public Color cyanColor = Color.cyan;
 
     [Header("UI")]
     public Text scoreText;
     public Text livesText;
-    public GameObject gameOverPanel; // assign in inspector
-    public Button restartButton;     // assign in inspector
-    public Button exitButton;        // assign in inspector
+    public GameObject gameOverPanel;
+    public Button restartButton;
+    public Button exitButton;
 
     [HideInInspector] public BallController currentBall;
 
@@ -43,11 +46,13 @@ public class GameManager : MonoBehaviour
 
         if (gameOverPanel) gameOverPanel.SetActive(false);
 
-        // set corner colors
+        // Set corner colors
         if (topRight) topRight.GetComponent<SpriteRenderer>().color = redColor;
         if (topLeft) topLeft.GetComponent<SpriteRenderer>().color = blueColor;
         if (bottomLeft) bottomLeft.GetComponent<SpriteRenderer>().color = greenColor;
         if (bottomRight) bottomRight.GetComponent<SpriteRenderer>().color = yellowColor;
+        if (middleRight) middleRight.GetComponent<SpriteRenderer>().color = orangeColor;
+        if (middleLeft) middleLeft.GetComponent<SpriteRenderer>().color = cyanColor;
 
         // Button listeners
         if (restartButton) restartButton.onClick.AddListener(RestartGame);
@@ -97,18 +102,19 @@ public class GameManager : MonoBehaviour
     public void OnBallArrived(BallController ball, Corner corner)
     {
         BallColor expected = BallColor.Red;
+
         switch (corner)
         {
             case Corner.TopRight: expected = BallColor.Red; break;
             case Corner.TopLeft: expected = BallColor.Blue; break;
             case Corner.BottomLeft: expected = BallColor.Green; break;
             case Corner.BottomRight: expected = BallColor.Yellow; break;
+            case Corner.MiddleRight: expected = BallColor.Orange; break;
+            case Corner.MiddleLeft: expected = BallColor.Cyan; break;
         }
 
         if (ball.ballColor == expected)
-        {
             score++;
-        }
         else
         {
             missCount++;
@@ -143,6 +149,8 @@ public class GameManager : MonoBehaviour
             case BallColor.Green: return greenColor;
             case BallColor.Blue: return blueColor;
             case BallColor.Yellow: return yellowColor;
+            case BallColor.Orange: return orangeColor;
+            case BallColor.Cyan: return cyanColor;
             default: return Color.white;
         }
     }
@@ -152,7 +160,6 @@ public class GameManager : MonoBehaviour
         Debug.Log("GAME OVER!");
         if (gameOverPanel) gameOverPanel.SetActive(true);
 
-        // hide score & lives when game over
         if (scoreText) scoreText.gameObject.SetActive(false);
         if (livesText) livesText.gameObject.SetActive(false);
     }
@@ -165,24 +172,17 @@ public class GameManager : MonoBehaviour
 
     private void RestartGame()
     {
-        // reset variables
         score = 0;
         missCount = 0;
 
-        // hide GameOver panel
         if (gameOverPanel) gameOverPanel.SetActive(false);
 
-        // show UI
         if (scoreText) scoreText.gameObject.SetActive(true);
         if (livesText) livesText.gameObject.SetActive(true);
 
-        // destroy current ball if exists
         if (currentBall != null)
-        {
             Destroy(currentBall.gameObject);
-        }
 
-        // spawn a new ball
         spawner.SpawnBall();
         UpdateUI();
     }
@@ -190,14 +190,17 @@ public class GameManager : MonoBehaviour
     private void ExitGame()
     {
 #if UNITY_EDITOR
-        UnityEditor.EditorApplication.isPlaying = false; // stop play mode in editor
+        UnityEditor.EditorApplication.isPlaying = false;
 #else
-        Application.Quit(); // quit build
+        Application.Quit();
 #endif
     }
 
     private Corner GetCornerFromDirection(Vector2 dir)
     {
+        if (Mathf.Abs(dir.x) > Mathf.Abs(dir.y)) // horizontal dominant
+            return dir.x > 0f ? Corner.MiddleRight : Corner.MiddleLeft;
+
         if (dir.x >= 0f && dir.y >= 0f) return Corner.TopRight;
         if (dir.x < 0f && dir.y >= 0f) return Corner.TopLeft;
         if (dir.x < 0f && dir.y < 0f) return Corner.BottomLeft;
@@ -212,6 +215,8 @@ public class GameManager : MonoBehaviour
             case Corner.TopLeft: return topLeft;
             case Corner.BottomLeft: return bottomLeft;
             case Corner.BottomRight: return bottomRight;
+            case Corner.MiddleRight: return middleRight;
+            case Corner.MiddleLeft: return middleLeft;
             default: return null;
         }
     }
