@@ -138,7 +138,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &25904392
 Transform:
   m_ObjectHideFlags: 0
@@ -148,8 +148,8 @@ Transform:
   m_GameObject: {fileID: 25904391}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.7981, y: 0.0194, z: -0.047513526}
-  m_LocalScale: {x: 4.7562, y: 10.099335, z: 4.7562}
+  m_LocalPosition: {x: 1.6133, y: 0.0194, z: -0.047513526}
+  m_LocalScale: {x: 10.167959, y: 10.099335, z: 4.7562}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 566801706}
@@ -196,7 +196,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
-  m_Color: {r: 0.3301887, g: 0.3301887, b: 0.3301887, a: 1}
+  m_Color: {r: 0.2830189, g: 0.2830189, b: 0.2830189, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -530,8 +530,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 517.57, y: 534}
-  m_SizeDelta: {x: 684.81, y: 136.7906}
+  m_AnchoredPosition: {x: 281.27963, y: 479.7067}
+  m_SizeDelta: {x: 408.3132, y: 95.9368}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &430954721
 MonoBehaviour:
@@ -555,7 +555,7 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 100
+    m_FontSize: 80
     m_FontStyle: 1
     m_BestFit: 0
     m_MinSize: 1
@@ -967,8 +967,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 466, y: 420.60474}
-  m_SizeDelta: {x: 581.6606, y: 136.7906}
+  m_AnchoredPosition: {x: 250.53143, y: 400.17783}
+  m_SizeDelta: {x: 346.8111, y: 95.9368}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &609856170
 MonoBehaviour:
@@ -992,7 +992,7 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 100
+    m_FontSize: 80
     m_FontStyle: 1
     m_BestFit: 0
     m_MinSize: 1
@@ -1344,12 +1344,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 800, y: 600}
+  m_ReferenceResolution: {x: 1920, y: 1080}
   m_ScreenMatchMode: 0
-  m_MatchWidthOrHeight: 0
+  m_MatchWidthOrHeight: 0.5
   m_PhysicalUnit: 3
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
@@ -1415,7 +1415,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1190284118
 Transform:
   m_ObjectHideFlags: 0
@@ -1699,7 +1699,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1586500229
 Transform:
   m_ObjectHideFlags: 0
