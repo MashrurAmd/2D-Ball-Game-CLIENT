@@ -3,10 +3,11 @@
 [RequireComponent(typeof(SpriteRenderer))]
 public class BallController : MonoBehaviour
 {
-    public float fallSpeed = 3f;
+    public float baseFallSpeed = 3f; // starting speed
     public float moveToCornerSpeed = 10f;
 
     [HideInInspector] public BallColor ballColor;
+    private float fallSpeed;
 
     private SpriteRenderer sr;
     private bool isMovingToCorner = false;
@@ -18,19 +19,27 @@ public class BallController : MonoBehaviour
         sr = GetComponent<SpriteRenderer>();
     }
 
-    // Called by spawner to randomize color
     public void InitRandom()
     {
         int r = Random.Range(0, 4);
         ballColor = (BallColor)r;
         sr.color = GameManager.Instance.GetColor(ballColor);
+
+        UpdateSpeed();
     }
 
-    // Optional explicit init
     public void Init(BallColor color)
     {
         ballColor = color;
         sr.color = GameManager.Instance.GetColor(ballColor);
+
+        UpdateSpeed();
+    }
+
+    private void UpdateSpeed()
+    {
+        // Increase speed based on score (e.g., every point adds 0.2f)
+        fallSpeed = baseFallSpeed + GameManager.Instance.score * 0.2f;
     }
 
     private void Update()
@@ -38,6 +47,13 @@ public class BallController : MonoBehaviour
         if (!isMovingToCorner)
         {
             transform.Translate(Vector2.down * fallSpeed * Time.deltaTime);
+
+            float bottomLimit = Camera.main.transform.position.y - Camera.main.orthographicSize - 1f;
+            if (transform.position.y < bottomLimit)
+            {
+                GameManager.Instance.OnBallMissed(this);
+                Destroy(gameObject);
+            }
         }
         else
         {
