@@ -108,6 +108,9 @@ public class GameManager : MonoBehaviour
             if (middleRight) middleRight.gameObject.SetActive(false);
             if (middleLeft) middleLeft.gameObject.SetActive(false);
         }
+
+
+
     }
 
     public void OnBallArrived(BallController ball, Corner corner)
@@ -209,14 +212,27 @@ public class GameManager : MonoBehaviour
 
     private Corner GetCornerFromDirection(Vector2 dir)
     {
-        if (Mathf.Abs(dir.x) > Mathf.Abs(dir.y)) // horizontal dominant
-            return dir.x > 0f ? Corner.MiddleRight : Corner.MiddleLeft;
+        if (GameManager.Instance.score < 30)
+        {
+            // Before 30 points: only 4 diagonal corners
+            if (dir.x >= 0f && dir.y >= 0f) return Corner.TopRight;
+            if (dir.x < 0f && dir.y >= 0f) return Corner.TopLeft;
+            if (dir.x < 0f && dir.y < 0f) return Corner.BottomLeft;
+            return Corner.BottomRight;
+        }
+        else
+        {
+            // After 30 points: 6 directions
+            if (Mathf.Abs(dir.x) > Mathf.Abs(dir.y)) // horizontal dominant
+                return dir.x > 0f ? Corner.MiddleRight : Corner.MiddleLeft;
 
-        if (dir.x >= 0f && dir.y >= 0f) return Corner.TopRight;
-        if (dir.x < 0f && dir.y >= 0f) return Corner.TopLeft;
-        if (dir.x < 0f && dir.y < 0f) return Corner.BottomLeft;
-        return Corner.BottomRight;
+            if (dir.x >= 0f && dir.y >= 0f) return Corner.TopRight;
+            if (dir.x < 0f && dir.y >= 0f) return Corner.TopLeft;
+            if (dir.x < 0f && dir.y < 0f) return Corner.BottomLeft;
+            return Corner.BottomRight;
+        }
     }
+
 
     private Transform GetCornerTransform(Corner c)
     {
