@@ -97,6 +97,17 @@ public class GameManager : MonoBehaviour
                 currentBall.MoveToCorner(cornerTransform, corner, 12f);
             }
         }
+
+        if (score >= 30)
+        {
+            if (middleRight) middleRight.gameObject.SetActive(true);
+            if (middleLeft) middleLeft.gameObject.SetActive(true);
+        }
+        else
+        {
+            if (middleRight) middleRight.gameObject.SetActive(false);
+            if (middleLeft) middleLeft.gameObject.SetActive(false);
+        }
     }
 
     public void OnBallArrived(BallController ball, Corner corner)
