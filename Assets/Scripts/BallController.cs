@@ -39,8 +39,15 @@ public class BallController : MonoBehaviour
 
     private void UpdateSpeed()
     {
-        fallSpeed = baseFallSpeed + GameManager.Instance.score * 0.05f;
+        // Cap speed between baseFallSpeed and maxFallSpeed
+        float maxFallSpeed = 12f; // tweak this value
+        float difficultyFactor = Mathf.Clamp01(GameManager.Instance.score / 100f);
+        // score 0 → factor 0, score 100+ → factor 1
+
+        // Smooth curve growth
+        fallSpeed = Mathf.Lerp(baseFallSpeed, maxFallSpeed, difficultyFactor);
     }
+
 
     private void Update()
     {

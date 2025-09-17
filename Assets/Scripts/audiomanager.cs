@@ -26,7 +26,7 @@ public class audiomanager : MonoBehaviour
         if (musicSource != null && background != null)
         {
             musicSource.clip = background;
-            musicSource.loop = true;   // 🔁 loop background music
+            musicSource.loop = true;   
             musicSource.Play();
         }
     }
@@ -44,4 +44,23 @@ public class audiomanager : MonoBehaviour
         if (SFX != null && wrongColor != null)
             SFX.PlayOneShot(wrongColor);
     }
+
+    public void StopMusic()
+    {
+        if (musicSource != null)
+            musicSource.Stop();
+    }
+
+    public void ResumeMusic()
+    {
+        if (musicSource != null)
+        {
+            musicSource.loop = true; // make sure it keeps looping
+            if (!musicSource.isPlaying)
+                musicSource.Play();
+        }
+    }
+
+
+
 }

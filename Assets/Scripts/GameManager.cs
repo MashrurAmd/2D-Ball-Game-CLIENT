@@ -60,26 +60,23 @@ public class GameManager : MonoBehaviour
 
         UpdateUI();
     }
-
     private void Update()
     {
         if (currentBall == null || missCount >= maxMisses) return;
 
         Vector2 center = centerPoint != null ? (Vector2)centerPoint.position : Vector2.zero;
 
+        // 🟢 Start swipe (anywhere on screen)
         if (Input.GetMouseButtonDown(0))
         {
             Vector3 world = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             world.z = 0f;
 
-            if (Vector2.Distance(world, center) <= centerRadius &&
-                Vector2.Distance(currentBall.transform.position, center) <= centerRadius)
-            {
-                swipeStartWorld = world;
-                swipeStarted = true;
-            }
+            swipeStartWorld = world;
+            swipeStarted = true;
         }
 
+        // 🔵 End swipe (anywhere on screen)
         if (swipeStarted && Input.GetMouseButtonUp(0))
         {
             Vector3 world = Camera.main.ScreenToWorldPoint(Input.mousePosition);
@@ -89,15 +86,20 @@ public class GameManager : MonoBehaviour
 
             if (swipe.magnitude < minSwipeDistance) return;
 
-            Corner corner = GetCornerFromDirection(swipe);
-            Transform cornerTransform = GetCornerTransform(corner);
-
-            if (cornerTransform != null && currentBall != null)
+            // ✅ Ball must be inside radius
+            if (Vector2.Distance(currentBall.transform.position, center) <= centerRadius)
             {
-                currentBall.MoveToCorner(cornerTransform, corner, 12f);
+                Corner corner = GetCornerFromDirection(swipe);
+                Transform cornerTransform = GetCornerTransform(corner);
+
+                if (cornerTransform != null && currentBall != null)
+                {
+                    currentBall.MoveToCorner(cornerTransform, corner, 12f);
+                }
             }
         }
 
+        // Show/hide orange & cyan after score
         if (score >= 40)
         {
             if (middleRight) middleRight.gameObject.SetActive(true);
@@ -108,10 +110,8 @@ public class GameManager : MonoBehaviour
             if (middleRight) middleRight.gameObject.SetActive(false);
             if (middleLeft) middleLeft.gameObject.SetActive(false);
         }
-
-
-
     }
+
 
     public void OnBallArrived(BallController ball, Corner corner)
     {
@@ -184,7 +184,14 @@ public class GameManager : MonoBehaviour
 
         if (scoreText) scoreText.gameObject.SetActive(false);
         if (livesText) livesText.gameObject.SetActive(false);
+
+        Time.timeScale = 0f; // pause game
+
+        // ⏹️ Stop background music
+        if (audiomanager.Instance != null)
+            audiomanager.Instance.StopMusic();
     }
+
 
     private void UpdateUI()
     {
@@ -205,9 +212,16 @@ public class GameManager : MonoBehaviour
         if (currentBall != null)
             Destroy(currentBall.gameObject);
 
+        Time.timeScale = 1f; // ▶️ resume game
+
+        // 🎵 resume background music
+        if (audiomanager.Instance != null)
+            audiomanager.Instance.ResumeMusic();
+
         spawner.SpawnBall();
         UpdateUI();
     }
+
 
     private void ExitGame()
     {

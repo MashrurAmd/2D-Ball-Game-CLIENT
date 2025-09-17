@@ -6,9 +6,16 @@ public class BallSpawner : MonoBehaviour
     public Transform spawnPoint;
     public GameManager gameManager;
 
-    private void Start()
+    private float spawnDelay = 1f; // base delay
+    private float minSpawnDelay = 0.3f; // cap minimum delay
+    private float lastSpawnTime;
+
+    private void Update()
     {
-        SpawnBall();
+        if (gameManager.currentBall == null && Time.time - lastSpawnTime >= spawnDelay)
+        {
+            SpawnBall();
+        }
     }
 
     public BallController SpawnBall()
@@ -25,6 +32,12 @@ public class BallSpawner : MonoBehaviour
 
         bc.InitRandom();
         if (gameManager != null) gameManager.currentBall = bc;
+
+        lastSpawnTime = Time.time;
+
+        // Adjust spawn rate with score
+        float difficultyFactor = Mathf.Clamp01(gameManager.score / 100f);
+        spawnDelay = Mathf.Lerp(1f, minSpawnDelay, difficultyFactor);
 
         return bc;
     }
