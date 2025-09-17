@@ -128,10 +128,15 @@ public class GameManager : MonoBehaviour
         }
 
         if (ball.ballColor == expected)
+        {
             score++;
+            audiomanager.Instance.PlayCorrect();   // ✅ play pop sound
+        }
         else
         {
             missCount++;
+            audiomanager.Instance.PlayWrong();     // ❌ play wrong sound
+
             if (missCount >= maxMisses)
             {
                 GameOver();
@@ -146,6 +151,8 @@ public class GameManager : MonoBehaviour
     public void OnBallMissed(BallController ball)
     {
         missCount++;
+        audiomanager.Instance.PlayWrong();  // ❌ missed ball = wrong sound
+
         if (missCount >= maxMisses)
         {
             GameOver();
@@ -154,6 +161,7 @@ public class GameManager : MonoBehaviour
         UpdateUI();
         spawner.SpawnBall();
     }
+
 
     public Color GetColor(BallColor c)
     {
