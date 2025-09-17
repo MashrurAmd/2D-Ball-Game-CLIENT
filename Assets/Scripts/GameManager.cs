@@ -98,7 +98,7 @@ public class GameManager : MonoBehaviour
             }
         }
 
-        if (score >= 30)
+        if (score >= 40)
         {
             if (middleRight) middleRight.gameObject.SetActive(true);
             if (middleLeft) middleLeft.gameObject.SetActive(true);
@@ -212,7 +212,7 @@ public class GameManager : MonoBehaviour
 
     private Corner GetCornerFromDirection(Vector2 dir)
     {
-        if (GameManager.Instance.score < 30)
+        if (GameManager.Instance.score < 40)
         {
             // Before 30 points: only 4 diagonal corners
             if (dir.x >= 0f && dir.y >= 0f) return Corner.TopRight;

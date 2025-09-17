@@ -21,7 +21,7 @@ public class BallController : MonoBehaviour
 
     public void InitRandom()
     {
-        int colorCount = GameManager.Instance.score >= 30 ? 6 : 4; // unlock Orange & Cyan after 30 points
+        int colorCount = GameManager.Instance.score >= 40 ? 6 : 4; // unlock Orange & Cyan after 30 points
         int r = Random.Range(0, colorCount);
         ballColor = (BallColor)r;
         sr.color = GameManager.Instance.GetColor(ballColor);
