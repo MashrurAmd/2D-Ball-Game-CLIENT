@@ -39,7 +39,7 @@ public class BallController : MonoBehaviour
 
     private void UpdateSpeed()
     {
-        fallSpeed = baseFallSpeed + GameManager.Instance.score * 0.1f;
+        fallSpeed = baseFallSpeed + GameManager.Instance.score * 0.05f;
     }
 
     private void Update()
