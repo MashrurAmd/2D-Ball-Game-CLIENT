@@ -239,7 +239,7 @@ GameObject:
   - component: {fileID: 160932241}
   - component: {fileID: 160932242}
   m_Layer: 0
-  m_Name: Yellow Corner
+  m_Name: Purple Corner
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -302,7 +302,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 1
   m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
-  m_Color: {r: 0.99173796, g: 1, b: 0.33490568, a: 1}
+  m_Color: {r: 1, g: 0.4292453, b: 0.94325745, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -534,7 +534,7 @@ MonoBehaviour:
   redColor: {r: 1, g: 0.32941177, b: 0.32941177, a: 1}
   greenColor: {r: 0.20392159, g: 0.4431373, b: 0.1764706, a: 1}
   blueColor: {r: 0.2784314, g: 0.27058825, b: 1, a: 1}
-  yellowColor: {r: 0.98823535, g: 1, b: 0.32941177, a: 1}
+  yellowColor: {r: 1, g: 0.427451, b: 0.93725497, a: 1}
   orangeColor: {r: 1, g: 0.6431373, b: 0.3647059, a: 1}
   cyanColor: {r: 0.3254902, g: 1, b: 0.9843138, a: 1}
   scoreText: {fileID: 0}

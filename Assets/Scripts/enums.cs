@@ -3,7 +3,7 @@ public enum BallColor
     Red,
     Blue,
     Green,
-    Yellow,
+    Purple,
     Orange,
     Cyan
 }

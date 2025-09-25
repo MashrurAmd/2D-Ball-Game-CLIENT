@@ -122,7 +122,7 @@ public class GameManager : MonoBehaviour
             case Corner.TopRight: expected = BallColor.Red; break;
             case Corner.TopLeft: expected = BallColor.Blue; break;
             case Corner.BottomLeft: expected = BallColor.Green; break;
-            case Corner.BottomRight: expected = BallColor.Yellow; break;
+            case Corner.BottomRight: expected = BallColor.Purple; break;
             case Corner.MiddleRight: expected = BallColor.Orange; break;
             case Corner.MiddleLeft: expected = BallColor.Cyan; break;
         }
@@ -170,7 +170,7 @@ public class GameManager : MonoBehaviour
             case BallColor.Red: return redColor;
             case BallColor.Green: return greenColor;
             case BallColor.Blue: return blueColor;
-            case BallColor.Yellow: return yellowColor;
+            case BallColor.Purple: return yellowColor;
             case BallColor.Orange: return orangeColor;
             case BallColor.Cyan: return cyanColor;
             default: return Color.white;
