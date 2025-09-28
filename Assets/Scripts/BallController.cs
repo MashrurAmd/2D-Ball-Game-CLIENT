@@ -53,7 +53,7 @@ public class BallController : MonoBehaviour
     {
         if (!isMovingToCorner)
         {
-            transform.Translate(Vector2.down * fallSpeed * Time.deltaTime);
+            transform.Translate(Vector2.down * fallSpeed * Time.deltaTime, Space.Self);
 
             float bottomLimit = Camera.main.transform.position.y - Camera.main.orthographicSize - 1f;
             if (transform.position.y < bottomLimit)

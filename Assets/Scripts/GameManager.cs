@@ -74,6 +74,14 @@ public class GameManager : MonoBehaviour
 
             swipeStartWorld = world;
             swipeStarted = true;
+
+            /*Rigidbody2D currentBallRb = currentBall.GetComponent<Rigidbody2D>();
+
+            currentBallRb.velocity = Vector2.zero;
+
+            currentBallRb.gravityScale = 0f;
+
+            currentBall.transform.position = world;*/
         }
 
         // 🔵 End swipe (anywhere on screen)
