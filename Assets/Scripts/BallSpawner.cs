@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 
 public class BallSpawner : MonoBehaviour
 {
@@ -6,9 +6,12 @@ public class BallSpawner : MonoBehaviour
     public Transform spawnPoint;
     public GameManager gameManager;
 
-    private float spawnDelay = 1f;
-    private float minSpawnDelay = 0.3f;
+    private float spawnDelay = 1f; // base delay
+    private float minSpawnDelay = 0.3f; // cap minimum delay
     private float lastSpawnTime;
+
+    [Header("Ball Settings")]
+    public float ballScale = 0.5f; // 🔹 Half size by default
 
     private void Update()
     {
@@ -27,6 +30,10 @@ public class BallSpawner : MonoBehaviour
         }
 
         GameObject go = Instantiate(ballPrefab, spawnPoint.position, Quaternion.identity);
+
+        // 🔹 Resize the ball to half its original size
+        go.transform.localScale *= ballScale;
+
         BallController bc = go.GetComponent<BallController>();
         if (bc == null) bc = go.AddComponent<BallController>();
 
@@ -35,6 +42,7 @@ public class BallSpawner : MonoBehaviour
 
         lastSpawnTime = Time.time;
 
+        // Adjust spawn rate with score
         float difficultyFactor = Mathf.Clamp01(gameManager.score / 100f);
         spawnDelay = Mathf.Lerp(1f, minSpawnDelay, difficultyFactor);
 
