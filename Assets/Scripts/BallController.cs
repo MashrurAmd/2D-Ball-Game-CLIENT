@@ -3,7 +3,7 @@
 [RequireComponent(typeof(SpriteRenderer))]
 public class BallController : MonoBehaviour
 {
-    public float baseFallSpeed = 3f; // starting speed
+    public float baseFallSpeed = 3f;
     public float moveToCornerSpeed = 10f;
 
     [HideInInspector] public BallColor ballColor;
@@ -21,33 +21,26 @@ public class BallController : MonoBehaviour
 
     public void InitRandom()
     {
-        int colorCount = GameManager.Instance.score >= 40 ? 6 : 4; // unlock Orange & Cyan after 30 points
+        int colorCount = GameManager.Instance.score >= 40 ? 6 : 4;
         int r = Random.Range(0, colorCount);
         ballColor = (BallColor)r;
-        sr.color = GameManager.Instance.GetColor(ballColor);
-
+        sr.sprite = GameManager.Instance.GetSprite(ballColor);
         UpdateSpeed();
     }
 
     public void Init(BallColor color)
     {
         ballColor = color;
-        sr.color = GameManager.Instance.GetColor(ballColor);
-
+        sr.sprite = GameManager.Instance.GetSprite(ballColor);
         UpdateSpeed();
     }
 
     private void UpdateSpeed()
     {
-        // Cap speed between baseFallSpeed and maxFallSpeed
-        float maxFallSpeed = 12f; // tweak this value
+        float maxFallSpeed = 12f;
         float difficultyFactor = Mathf.Clamp01(GameManager.Instance.score / 100f);
-        // score 0 → factor 0, score 100+ → factor 1
-
-        // Smooth curve growth
         fallSpeed = Mathf.Lerp(baseFallSpeed, maxFallSpeed, difficultyFactor);
     }
-
 
     private void Update()
     {

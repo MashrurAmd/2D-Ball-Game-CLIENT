@@ -6,8 +6,8 @@ public class BallSpawner : MonoBehaviour
     public Transform spawnPoint;
     public GameManager gameManager;
 
-    private float spawnDelay = 1f; // base delay
-    private float minSpawnDelay = 0.3f; // cap minimum delay
+    private float spawnDelay = 1f;
+    private float minSpawnDelay = 0.3f;
     private float lastSpawnTime;
 
     private void Update()
@@ -35,7 +35,6 @@ public class BallSpawner : MonoBehaviour
 
         lastSpawnTime = Time.time;
 
-        // Adjust spawn rate with score
         float difficultyFactor = Mathf.Clamp01(gameManager.score / 100f);
         spawnDelay = Mathf.Lerp(1f, minSpawnDelay, difficultyFactor);
 
