@@ -89,7 +89,7 @@ public class GameManager : MonoBehaviour
         }
 
         // Show/hide orange & cyan after 40 points
-        if (score >= 40)
+        if (score >= 5)
         {
             if (middleRight) middleRight.gameObject.SetActive(true);
             if (middleLeft) middleLeft.gameObject.SetActive(true);
@@ -163,8 +163,8 @@ public class GameManager : MonoBehaviour
 
     private void UpdateUI()
     {
-        if (scoreText) scoreText.text = $"Score: {score}";
-        if (livesText) livesText.text = $"Lives: {maxMisses - missCount}";
+        if (scoreText) scoreText.text = $"{score}";
+        if (livesText) livesText.text = $" {maxMisses - missCount}";
     }
 
     private void RestartGame()
